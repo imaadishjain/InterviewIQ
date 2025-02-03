@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import {  UserButton } from "@clerk/nextjs";
+
 import { usePathname } from "next/navigation";
 import {  useClerk } from '@clerk/nextjs';
 import { Button } from "@/components/ui/button";
@@ -65,7 +65,6 @@ function Header() {
     
       <Button onClick={handleSignOut}>Sign Out</Button>
      
-      <UserButton />
     </div>
   );
 }
