@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
     
-       <ClerkProvider>
+       <ClerkProvider afterSignOutUrl="/">
           <div>{children}</div>
        </ClerkProvider>
         
