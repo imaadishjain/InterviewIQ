@@ -1,14 +1,20 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { SignOutButton, UserButton } from "@clerk/nextjs";
+import {  UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { useClerk } from '@clerk/nextjs'
+import { SignOutButton, useClerk } from '@clerk/nextjs';
 import { Button } from "@/components/ui/button";
 
 function Header() {
   const path = usePathname().split("/").filter(Boolean).pop();
- 
+  const { signOut } = useClerk();
+
+  const handleSignOut = () => {
+    signOut().then(() => {
+      window.location.href = '/'; // Redirect to the home page after sign-out
+    });
+  };
 
   return (
     <div className="flex p-5 item-center justify-between bg-secondary shadow-sm ">
@@ -48,8 +54,8 @@ function Header() {
           Feedback
         </li>
       </ul>
-       <SignOutButton signOutOptions={{redirectUrl:'/'}}>
-
+      <SignOutButton signOutOptions={{ redirectUrl: '/' }}>
+        <Button variant="outline">Sign Out</Button>
       </SignOutButton>
       <UserButton />
     </div>
