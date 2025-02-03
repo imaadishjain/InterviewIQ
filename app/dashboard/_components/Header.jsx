@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-
+import {  UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import {  useClerk } from '@clerk/nextjs';
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
-function Header() {
+function Header({setLoader}) {
   const path = usePathname().split("/").filter(Boolean).pop();
 
 
@@ -16,8 +16,10 @@ function Header() {
 
   const handleSignOut = async () => {
     try {
+      setLoader(true);
       await signOut();
-      router.push("/"); // Redirect to the home page after sign-out
+      router.push("/");
+      setLoader(false); // Redirect to the home page after sign-out
     } catch (error) {
       console.error("Sign out failed:", error);
     }
@@ -65,6 +67,7 @@ function Header() {
     
       <Button onClick={handleSignOut}>Sign Out</Button>
      
+      <UserButton />
     </div>
   );
 }
