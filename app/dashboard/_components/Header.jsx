@@ -7,7 +7,7 @@ import { useClerk } from '@clerk/nextjs'
 import { Button } from "@/components/ui/button";
 
 function Header() {
-  const path = usePathname().split("/").filter(Boolean).pop();
+
   const { signOut } = useClerk()
   return (
     <div className="flex p-5 item-center justify-between bg-secondary shadow-sm ">
@@ -47,9 +47,7 @@ function Header() {
           Feedback
         </li>
       </ul>
-      <Button onClick={() => signOut({ redirectUrl: 'https://interview-iq-by-aadishjain.vercel.app/' })}>
-          SignOut
-      </Button>
+      <UserButton/>
     </div>
   );
 }
