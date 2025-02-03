@@ -1,101 +1,108 @@
+
+
+"use client";
+import { useState } from "react";
+import { Container } from "@/components/Container";
+import { Hero } from "@/components/Hero";
+import { SectionTitle } from "@/components/SectionTitle";
+import { Benefits } from "@/components/Benefits";
+import { Testimonials } from "@/components/Testimonials";
+import { Navbar } from "@/components/Navbar";
+
+import Link from "next/link";
 import Image from "next/image";
+import { benefitOne, benefitTwo } from "@/components/data";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const navigation = [
+    { name: "Product", href: "" },
+    { name: "Features", href: "#features" },
+    { name: "Testimonial", href: "#testimonials" },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  // State to track active menu item
+  const [active, setActive] = useState("Product");
+
+  return (
+    <>
+      {/* Navbar */}
+      <div id="" className="w-full bg-secondary fixed top-0 left-0 z-50 gap-3 ">
+        <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-1">
+          
+          {/* Logo */}
+          <Link href="/dashboard">
+            <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
+              <Image src={"/logo3.png"} width={160} height={100} alt="logo" />
+            </span>
+          </Link>
+
+          {/* Navigation Links */}
+          <div className="hidden text-center lg:flex lg:items-center">
+            <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
+              {navigation.map((menu, index) => (
+                <li className="mr-3 nav__item" key={index}>
+                  <Link
+                    href={menu.href}
+                    className={`inline-block px-4 py-2 text-lg font-normal rounded-md no-underline 
+                      ${active === menu.name 
+                        ? "text-indigo-500 font-semibold bg-indigo-100 dark:bg-gray-800"
+                        : "text-gray-800 dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500"
+                      }`}
+                    onClick={() => setActive(menu.name)}
+                  >
+                    {menu.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Get Started Button */}
+          <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
+            <div className="hidden mr-3 lg:flex nav__item">
+              <Link
+                href="/dashboard"
+                className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      {/* Page Content */}
+      <Container>
+        <Hero />
+
+        {/* Features Section */}
+        <div id="features">
+          <SectionTitle
+            preTitle="InterviewIQ Benefits"
+            title="Why should you use this application"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            Ace your interviews with personalized mock sessions, tailored questions, instant feedback, and performance ratings—all in one platform!
+          </SectionTitle>
+
+          <Benefits data={benefitOne} />
+          <Benefits imgPos="right" data={benefitTwo} />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* Testimonials Section */}
+        <div id="testimonials">
+          <Testimonials />
+        </div>
+
+        <Footer />
+      </Container>
+
+      {/* Global CSS for Smooth Scrolling */}
+      <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
+    </>
   );
 }
