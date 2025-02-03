@@ -3,10 +3,12 @@ import React from "react";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import { useClerk } from '@clerk/nextjs'
+import { Button } from "@/components/ui/button";
 
 function Header() {
   const path = usePathname().split("/").filter(Boolean).pop();
-
+  const { signOut } = useClerk()
   return (
     <div className="flex p-5 item-center justify-between bg-secondary shadow-sm ">
       <Image src={"/logo3.png"} width={160} height={100} alt="logo" />
@@ -45,7 +47,9 @@ function Header() {
           Feedback
         </li>
       </ul>
-      <UserButton />
+      <Button onClick={() => signOut({ redirectUrl: 'https://interview-iq-by-aadishjain.vercel.app/' })}>
+          SignOut
+      </Button>
     </div>
   );
 }
