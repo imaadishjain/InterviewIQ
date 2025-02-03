@@ -5,7 +5,8 @@ import { useState, useEffect } from "react";
 import { db } from "@/utils/db";
 import { eq } from "drizzle-orm";
 import Webcam from "react-webcam";
-import { Lightbulb, WebcamIcon } from "lucide-react";
+import { Lightbulb} from "lucide-react";
+import { BiSolidWebcam } from "react-icons/bi";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -74,7 +75,7 @@ function Interview({ params }) {
             />
           ) : (
             <>
-              <WebcamIcon className="h-72 w-full p-20 my-7 bg-secondary  rounded-lg border" />
+              <BiSolidWebcam className="h-72 w-full p-20 my-7 bg-secondary  rounded-lg border" />
               <Button variant="ghost" onClick={() => setWebCamEnabled(true)} className="w-full">
                 Enable Web Cam and Microphone
               </Button>
