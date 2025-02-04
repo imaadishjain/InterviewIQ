@@ -13,7 +13,7 @@ import Link from 'next/link';
 function StartInterview({ params }) {
   const pathname = usePathname();
   const interviewId = pathname.split("/")[3];
-  const [mockInterviewQues, setMockInterviewQues] = useState(null);
+  const [mockInterviewQues, setMockInterviewQues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [interviewData, setInterviewData] = useState();
@@ -37,7 +37,8 @@ function StartInterview({ params }) {
       if (result.length > 0 && result[0].jsonMockResp) {
         const parsedData = JSON.parse(result[0].jsonMockResp);
         console.log("Parsed data:", parsedData);
-        setMockInterviewQues(parsedData);
+        const questionsArray = Array.isArray(parsedData) ? parsedData : [parsedData];
+        setMockInterviewQues(questionsArray);
         setInterviewData(result[0]);
       } else {
         console.error("No data found for the given interviewId");
