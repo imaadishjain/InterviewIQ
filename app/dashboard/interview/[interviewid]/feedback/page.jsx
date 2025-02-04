@@ -75,7 +75,7 @@ function feedback() {
       <h2 className="text-primary text-lg my-3">
         Your overall interview rating:
         <strong
-          className={`${overAllRating < 3 ? "text-red-500" : "text-green-500"}`}
+          className={`${overAllRating < 2 ? "text-red-500" : "text-green-500"}`}
         >
           {overAllRating}<span className="text-primary">/5</span>
         </strong>
