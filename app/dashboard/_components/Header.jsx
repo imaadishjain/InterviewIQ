@@ -5,26 +5,10 @@ import {  UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import {  useClerk } from '@clerk/nextjs';
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
-function Header({setLoader}) {
+
+function Header() {
   const path = usePathname().split("/").filter(Boolean).pop();
-
-
-  const { signOut } = useClerk();
-  const router = useRouter();
-
-  const handleSignOut = async () => {
-    try {
-      setLoader(true);
-      await signOut();
-      router.push("/");
-      setLoader(false); // Redirect to the home page after sign-out
-    } catch (error) {
-      console.error("Sign out failed:", error);
-    }
-  };
-
 
   return (
     <div className="flex p-5 item-center justify-between bg-secondary shadow-sm ">
@@ -63,10 +47,7 @@ function Header({setLoader}) {
         >
           Feedback
         </li>
-      </ul>
-    
-      <Button onClick={handleSignOut}>Sign Out</Button>
-     
+      </ul>   
       <UserButton />
     </div>
   );
