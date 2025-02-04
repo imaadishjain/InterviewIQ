@@ -51,7 +51,7 @@ function RecordAnswerSection({
   const UpdateUserAnswer = async () => {
     console.log("Printing userAns", userAnswer);
     setLoading(true);
-    onst feedbackPrompt =
+    const feedbackPrompt =
       "Question: " +
       mockInterviewQues[activeQuestionIndex]?.Question +
       ", User Answer: " +
