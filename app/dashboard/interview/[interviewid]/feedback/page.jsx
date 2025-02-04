@@ -45,8 +45,9 @@ function feedback() {
     }
 
     sum = sum / (5 * result.length);
-    sum=sum.toPrecision(2);
+    
     sum=sum*5;
+    sum=sum.toPrecision(2);
     setOverallRating(sum);
     setLoader(false);
   };
