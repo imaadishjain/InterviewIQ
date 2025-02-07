@@ -25,9 +25,8 @@ function RecordAnswerSection({
   const [userAnswer, setUserAnswer] = useState(" ");
   const [loading, setLoading] = useState(false);
 
-  
   const { user } = useUser();
-  const router=useRouter();
+  const router = useRouter();
   const {
     error,
     interimResult,
@@ -52,19 +51,19 @@ function RecordAnswerSection({
     console.log("Printing userAns", userAnswer);
     setLoading(true);
     const feedbackPrompt =
-      "Question: " +
+      "Question:" +
       mockInterviewQues[activeQuestionIndex]?.Question +
-      ", User Answer: " +
+      ", User Answer:" +
       userAnswer +
-      ", Based on the given interview question and answer, provide a rating (between 1 to 5) and feedback highlighting areas of improvement in JSON format. Keep the response concise (3 to 5 lines) with a rating field (in lowercase) and a feedback field (in lowercase).Answers should be in a paragraph";
+      ",Depends on question and answer for given interview question please give us rating (should be from 1 to 5 )  for answer and feedback as area of improvement if any" +
+      "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
 
     const result = await chatSession.sendMessage(feedbackPrompt);
     const JsonFeedbackResp = result.response
       .text()
       .replace("```json", "")
       .replace("```", "");
-     const data = JSON.parse(JsonFeedbackResp);
-  
+    const data = JSON.parse(JsonFeedbackResp);
 
     const resp = await db.insert(UserAnswer).values({
       mockIdRef: interviewData?.mockId,
@@ -77,20 +76,16 @@ function RecordAnswerSection({
       createdAt: moment().format("DD-MM-yyyy"),
     });
 
-
-
     if (resp) {
       toast("User Answer recorded successfully");
       setUserAnswer("");
       setResults([]);
-      if(lastIndex==activeQuestionIndex)
-      {
-          router.push('/dashboard/interview/'+interviewData?.mockId+'/feedback');
-      }
-      else
-      {
-        
-      setActiveQuestionIndex(activeQuestionIndex+1);
+      if (lastIndex == activeQuestionIndex) {
+        router.push(
+          "/dashboard/interview/" + interviewData?.mockId + "/feedback"
+        );
+      } else {
+        setActiveQuestionIndex(activeQuestionIndex + 1);
       }
     } else {
       alert("Some error while updating to DataBase");
@@ -119,7 +114,7 @@ function RecordAnswerSection({
       <div className="flex flex-col mt-20 justify-center items-center bg-black rounded-lg p-5">
         <Image
           className="absolute"
-          src={"/webcamfinal.png"}
+          src={"/webcam.png"}
           width={200}
           height={200}
           alt="webcam"
@@ -134,27 +129,29 @@ function RecordAnswerSection({
         />
       </div>
 
-      <Button
-        disabled={loading}
-        variant="outline"
-        className="my-10"
-        onClick={() => StartStopRecording()}
-      >
-        {isRecording ? (
-          <h2 className="text-red-600 items-center animate-pulse flex gap-2">
-            <StopCircle /> Stop Recording...
-          </h2>
-        ) : (
-          <h2 className="text-primary flex gap-2 items-center">
-            <Mic /> Record Answer
-          </h2>
-        )}
-      </Button>
-
-      {loading && <div className="flex flex-col items-center justify-center text-primary text-xl ">
-        Please wait, the answer is being saved in the database.
-         <BarLoader color="#4845D2" />
-      </div>}
+      {loading ? (
+        <div className="flex flex-col items-center justify-center text-primary text-xl mt-6 ">
+          Please wait, the answer is being saved in the database.
+          <BarLoader color="#4845D2" />
+        </div>
+      ) : (
+        <Button
+          disabled={loading}
+          variant="outline"
+          className="my-10"
+          onClick={() => StartStopRecording()}
+        >
+          {isRecording ? (
+            <h2 className="text-red-600 items-center animate-pulse flex gap-2">
+              <StopCircle /> Stop Recording...
+            </h2>
+          ) : (
+            <h2 className="text-primary flex gap-2 items-center">
+              <Mic /> Record Answer
+            </h2>
+          )}
+        </Button>
+      )}
     </div>
   );
 }
