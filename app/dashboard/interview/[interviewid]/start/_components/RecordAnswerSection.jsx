@@ -22,7 +22,7 @@ function RecordAnswerSection({
   setActiveQuestionIndex,
   lastIndex,
 }) {
-  const [userAnswer, setUserAnswer] = useState(" ");
+  const [userAnswer, setUserAnswer] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { user } = useUser();
