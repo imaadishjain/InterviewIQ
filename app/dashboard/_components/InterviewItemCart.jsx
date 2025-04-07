@@ -172,9 +172,12 @@ function InterviewItemCart({ interview, onRemove, setLoader }) {
 
     try {
       const result = await chatSession.sendMessage(inputPrompt);
-      let mockJsonResponse = result.response.text();
-      mockJsonResponse = mockJsonResponse.replace(/```json|```/g, "");
-
+     let mockJsonResponse = result.response.text();
+      mockJsonResponse = mockJsonResponse
+        .replace(/```json|```/g, "") // Remove code blocks
+        .replace(/\**/g, "") // Remove bold markers
+        .trim();
+      
       if (mockJsonResponse) {
         const res = await db
           .insert(MockInterview)
