@@ -56,7 +56,7 @@ function RecordAnswerSection({
       ", User Answer:" +
       userAnswer +
       ",Depends on question and answer for given interview question please give us rating (should be from 1 to 5 )  for answer and feedback as area of improvement if any" +
-      "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field and it should not be a NULL";
+      "in just max 3 lines to improve it in JSON format with 'rating' field and 'feedback' field and it should not be a NULL";
 
     const result = await chatSession.sendMessage(feedbackPrompt);
     const JsonFeedbackResp = result.response
