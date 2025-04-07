@@ -9,6 +9,15 @@ import { useEffect, useState } from 'react'
 
 
 function QuestionsSection({mockInterviewQues,activeQuestionIndex}) {
+
+
+    useEffect(() => {
+    // Auto-play when question changes
+    if (mockInterviewQues[activeQuestionIndex]?.Question) {
+      textToSpeech(mockInterviewQues[activeQuestionIndex].Question);
+    }
+   }, [activeQuestionIndex]);
+    
     
      const textToSpeech=(text)=>
      {
