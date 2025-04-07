@@ -120,7 +120,7 @@ function RecordAnswerSection({
       <div className="flex flex-col mt-20 justify-center items-center bg-black rounded-lg p-5">
         <Image
           className="absolute"
-          src={"/webcam.png"}
+          src={"/webcamfinal.png"}
           width={200}
           height={200}
           alt="webcam"
