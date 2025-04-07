@@ -79,7 +79,7 @@ function RecordAnswerSection({
     });
 
     if (resp) {
-      toast("Your answer has been recorded successfully");
+      toast("Your answer has been recorded successfully.");
       setUserAnswer("");
       setResults([]);
       if (lastIndex == activeQuestionIndex) {
@@ -100,7 +100,7 @@ function RecordAnswerSection({
   useEffect(() => {
     if(!isRecording && userAnswer!="" && userAnswer.length<10)
     {
-      toast("Your answer is too short for analysis please re-record your answer");
+      toast("Your answer is too short for analysis please re-record your answer.");
     }
     if (!isRecording && userAnswer.length > 10) {
       UpdateUserAnswer();
