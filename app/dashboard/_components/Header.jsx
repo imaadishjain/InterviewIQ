@@ -52,6 +52,17 @@ function Header() {
         >
           Feedback
         </div>
+
+        <div
+          className={`text-black transition-all cursor-pointer 
+            
+            ${path == "Interview Analysis"  && "text-primary font-bold"}
+
+            
+            `}
+        >
+          Interview Analysis
+        </div>
       </div>   
       <UserButton />
     </div>
